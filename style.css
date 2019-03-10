@@ -1,0 +1,54 @@
+#menu
+{
+	position: fixed;
+	width: 100%;
+	height: 35px;
+	text-align: center;
+
+}
+body{
+	background-image: url("disney-simba.jpg"); /* The image used */
+	background-color: #cccccc; /* Used if the image is unavailable */
+	height: 500px; /* You must set a specified height */
+	background-position: center; /* Center the image */
+	background-repeat: no-repeat; /* Do not repeat the image */
+	background-size: cover; /* Resize the background image to cover the entire */
+}
+.top a:hover {
+	background-color: grey;
+	color: black;
+  }
+
+a{
+	background:whitesmoke;
+	color:black;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	border-radius: 25px;
+	padding: 5px; 
+	text-decoration: none;
+	margin: 5px;
+}
+section{
+	color: antiquewhite;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 10pt;
+
+}
+* {
+	box-sizing: border-box;
+  }
+  
+  .column {
+	float: left;
+	width: 33.33%;
+	padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+	content: "";
+	clear: both;
+	display: table;
+  }
+
+
