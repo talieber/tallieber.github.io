@@ -9,10 +9,11 @@
 body{
 	background-image: url("disney-simba.jpg"); /* The image used */
 	background-color: #cccccc; /* Used if the image is unavailable */
-	height: 500px; /* You must set a specified height */
+	height: 100%; /* You must set a specified height */
 	background-position: center; /* Center the image */
-	background-repeat: no-repeat; /* Do not repeat the image */
+	background-repeat:no-repeat; /* Do not repeat the image */
 	background-size: cover; /* Resize the background image to cover the entire */
+
 }
 .top a:hover {
 	background-color: grey;
@@ -31,8 +32,21 @@ a{
 section{
 	color: antiquewhite;
 	font-family: 'Courier New', Courier, monospace;
-	font-size: 10pt;
+	font-size: 15pt;
+	text-align:center;
+}
 
+h1{
+	font-size: 20pt;
+	color:salmon;
+	font-family: 'Courier New', Courier, monospace;
+
+}
+
+.white_bg 
+{
+    background-color:wheat;
+    padding: 3px; /*add this if you want a bit of space around the text*/
 }
 * {
 	box-sizing: border-box;
@@ -50,5 +64,6 @@ section{
 	clear: both;
 	display: table;
   }
+
 
 
