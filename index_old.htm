@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="jquery.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id = "welcome_page" class= "Page">
+        <img src= "pacman-dribbble.gif" align = "right">
+        <button type = "button"  onclick="openPage('registration_page', 'welcome_page')" align = "left">
+                Registration
+        </button>
+        <button type = "button"  onclick="openPage('logIn_page', 'welcome_page')" align = "left">
+                Log in
+        </button>
+    </div>
+    <div id = "registration_page" class= "Page" style="display: none">
+        <img src= "pacman-dribbble.gif" align = "right" width="300" height="300" >    
+
+            <h1 align="center">
+                    Registration!
+            </h1>
+            <p>
+                    Please fill in all fields below and at the end press "Submit"
+     
+            </p>
+
+        <form id="reg_detailes" action="javascript:validateDetails()">
+            <table>
+                    <tr>
+                            <td>Username: </td>
+                            <td><input type="text" name="username"></td>
+                    </tr>
+                    <tr>
+                            <td>Password: </td>
+                            <td><input type="text" name="password">  <span class="note">Password must contain at least 8 characters including numbers and letters</span> </td>
+                        </tr>
+                    <tr>
+                            <td>First name: </td>
+                            <td><input type="text" name="first_name"></td>
+                    </tr>
+                    <tr>
+                            <td>Last name: </td>
+                            <td><input type="text" name="last_name"></td>
+                    </tr>
+                    <tr>
+                            <td>E-mail: </td>
+                            <td><input type="text" name="email">  <span class="note">Example: israel@gmail.com</span></td>
+                        </tr>
+                    <tr>
+                            <td>Date of birth: </td>
+                            <td><input type="Date" name="choose_date"></td>
+                    </tr>  
+                    <tr>
+                            <td align="right"><input type="submit" value="Submit" ></td>
+                    </tr>
+            </table>
+        </form> 
+    
+           <!-- <button type = "button"  onclick="validateDetails()" align = "left">
+                    Sign and login
+            </button>   -->
+        </div>
+    <div id = "logIn_page" class="Page" style="display: none">
+        <img src= "pacman-dribbble.gif" align = "right" >    
+        <table>
+                <tr>
+                        <td>Username: </td>
+                        <td><input type="text" name = "inputUsernameLogin"></td>
+                </tr>
+                <tr>
+                        <td>Password: </td>
+                        <td><input type="text" name = "inputPasswordLogin"></td>
+                </tr>
+                <tr>
+        </table>
+        <button type = "button" onclick="validateLogin('settings_page', 'logIn_page')" align = "left">
+            <!-- "openPage('game_page', 'logIn_page')" -->
+                start game!
+        </button>
+    </div>
+
+    <div id = "settings_page" class= "Page" style="display: none">
+        <img src= "pacman-dribbble.gif" align = "right" width="300" height="300" class="center" >    
+
+            <h1 align="center">
+                    Settings!
+            </h1>
+            <p>
+                    In order to start playing, please choose your game settings.<br>
+                    You can also press button "Random" in order to play with deafult settings. In this case, the arrow keys on the keyboard are the game keys.
+            </p>
+            <form id="setting_detailes" action="javascript:setSettings()">
+                            <tr>
+                                    <td><span class="subtitle"> Direction keys:<br> </span> Please choose the keys you want to play with them. In each field just press the choosen key on keyboard in order to set it.<br>
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <td> left: <input type="text" name="left_key" onkeydown="setDirections(name)"> </td>
+                                    <td> right: <input type="text" name="right_key" onkeydown="setDirections(name)"> </td>
+                                    <td> up: <input type="text" name="up_key" onkeydown="setDirections(name)"> </td>
+                                    <td> down: <input type="text" name="down_key" onkeydown="setDirections(name)"> <br><br></td>
+                            </tr>
+                            <tr>
+                                    <td>
+                                    <span class="subtitle"> Food number:<br> </span> Please choose the number of food-balls in the game. Pay attention: minimum number is 50 and maximum number is 90.<br>
+                                    </td>
+                             </tr>
+                            <tr>
+                                    <td> <input type="text" name="balls_number"> <br><br></td>
+                                            
+                            </tr>
+                            <tr>
+                                    <span class="subtitle"> Food colors:<br> </span>
+                                    Please choose three diffrent colors for three different score of food. <br>
+                                    First color- will be 60% of the food in the game with score of 5.<br>
+                                    Second color- will be 30% of the food in the game with score of 15.<br>
+                                    Third color- will be 10% of the food in the game with score of 25.<br>
+                                     </tr>
+                            <tr>
+                                    <td> first color: <input type="color" id="first_color"> </td>
+                                    <td> second color: <input type="color" id="second_color"> </td>
+                                    <td> third color: <input type="color" id="third_color"><br><br> </td>
+                            </tr>
+                            <tr>
+                                    <span class="subtitle"> Time:<br> </span>  
+                                    Please choose total game time in seconds. Pay attention: minimum time is 60 seconds.<br>
+                            </tr>
+                            <tr>
+                                    <td> <input type="number" name="game_time"><br><br></td>
+    
+                            </tr>
+                            <tr>
+                                    <span class="subtitle"> Monsters:<br> </span>
+                                    Plese choose number of monsters in the game.  Pay attention: minimum number is one and maximum is three.<br>
+                            </tr>
+                            <tr>
+                                    <td> <input type="number" name="monster_number"> <br><br></td>
+                            </tr>
+                            <tr>
+                                    <td ><input type="button" value="Random" onclick="chooseRandomSettings()"></td>
+    
+                                    <td ><input type="submit" value="Submit" ></td>
+                            </tr>   
+            
+                            <!-- <p id="demo1"></p>
+                            <p id="demo2"></p>
+                            <p id="demo3"></p>
+                            <p id="demo4"></p>
+                            <p id="demo5"></p>
+                            <p id="demo6"></p>
+                            <p id="demo7"></p> -->
+            </form> 
+
+    </div>
+
+    <div id = "about_page" class="Page" style="display: none">
+
+    </div>
+    <div id = "game_page" class="Page" style="display: none">
+            <ul>
+                    <li><a class="active" href="#about" onclick="openPage('about_page','game_page')">About</a></li>
+                    <li><a href="#welcome" onclick="openPage('welcome_page','game_page')">Welcom</a></li>
+                  </ul>
+                  
+         <br/>
+            
+        <table>
+            <tr>
+                <td> SCORE:
+                    <input id="lblScore" type="text"/>
+                </td> 
+                <td>TIME:
+                    <input id="lblTime" type="text"/>
+                </td>
+                <td>  LIFE:
+                        <input id="lblLife" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                        Pacman name:
+                        <input id="lblName" type="text"/>
+                </td>
+                <td>
+                 <input id="newGame" type="button" onclick="openPage('settings_page', 'game_page')" value="newGame!" align="right"/>
+
+                </td>
+
+            </tr>
+        </table>
+        <br/>
+        <!-- SCORE:
+        <!-- <input id="lblScore" type="text"/>
+        <br/>
+        TIME:
+        <input id="lblTime" type="text"/>
+        <br/>
+        <input id="newGame" type="button" onclick="openPage('settings_page', 'game_page')" value="newGame!" align="right"/>
+        <br/> --> 
+        <canvas id="canvas" height="600" width="600"></canvas>
+    </div>
+ 
+
+<script type="text/javascript">
+ var context = canvas.getContext("2d");
+    var shape = new Object();
+    var board;
+    var score;
+    var curr_player;
+    var pac_color;
+    var start_time;
+    var time_elapsed;
+    var interval;
+    var maxTime;
+    var life=3;
+    var numberOfBalls;
+    var numOfFirstColor;
+    var numOfSecondColor;
+    var numOfThirdColor;
+    var firstColor="";
+    var secondColor="";
+    var thirdColor="";
+    var numOfMonsters;
+    var direction={};
+    var registeredUsers = [
+        {username: 'a', password: 'a'}
+    ];
+
+    function openPage(pageToShow, pageToHide){
+        var x = document.getElementById(pageToShow);
+        if (x.style.display == "none"){
+            x.style.display ="block"; //show
+            var y = document.getElementById(pageToHide);
+            y.style.display="none";
+        }
+        if(pageToShow=="game_page"){
+                Start();
+        }
+    }
+    function validateDetails(){
+
+        var empty = false;
+        $('#reg_detailes :input[type="text"]').each(function(){
+                if($(this).val()==""){
+                        empty =true;
+                        return false;
+                }
+        });
+        $('#reg_detailes :input[type="Date"]').each(function(){
+                if($(this).val()==""){
+                        empty =true;
+                        return false;                
+                }
+        });
+        if(empty){
+                alert("All fields must be full in")
+                return;
+        }
+        var text="";
+        var valid=true;
+        var attr_username=$('input[name="username"]').val();
+        for(var i=0;i<registeredUsers.length;i++)
+        {
+                if(registeredUsers[i].username==attr_username){
+                        text+="username already exist. enter new username\n"
+                        valid=false;
+                }
+        }
+
+        var pass=$('input[name="password"]').val();
+        if(pass.length<8||!/\d/.test(pass)|| !isNaN(pass))
+         {       text+="password must contain at least 8 characters including numbers and letters\n ";
+                valid=false;
+         }
+         var firstName=$('input[name="first_name"]').val();
+         var lastName=$('input[name="last_name"]').val();
+         if(!/^[a-zA-Z]+$/.test(firstName)|| !/^[a-zA-Z]+$/.test(lastName))
+           {     text+="first name and last name contains letters only\n "
+                valid=false;
+           }
+        var email=$('input[name="email"]').val();
+        var reg_email = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+        if (!reg_email.test(email))
+        {       
+                text+="email not valid. email form is: israel@domain.com \n";
+                valid=false;
+        }
+       
+
+        var today = new Date();
+        var choosenDate = new Date($('input[name="choose_date"]').val());
+        if (choosenDate.getTime() >= today.getTime()||(choosenDate.getDate()==today.getDate())&&(choosenDate.getMonth()==today.getMonth())&&(choosenDate.getFullYear()==today.getFullYear())) {
+            text+="Date of birth not valid. Please choose date before today's date ";
+            valid=false;
+        }
+        if(!valid){
+                alert(text)
+        }
+        else{
+                
+                registeredUsers.push({ username: attr_username, password: pass})
+                curr_player=attr_username;
+                openPage("settings_page","registration_page")
+        }
+     }
+
+    //This fubction validates the username and
+    function validateLogin(pageToShow, pageToHide){
+        for (i = 0; i < registeredUsers.length; i++){
+            var username = $('input[name="inputUsernameLogin"]').val();
+            var password = $('input[name="inputPasswordLogin"]').val();
+            var message = "Username is not found in the system. Please try again."
+            if (username == registeredUsers[i].username && password != registeredUsers[i].password){
+                message = "Password is incorect. Please type your password again."
+                break;
+            } else if (password == registeredUsers[i].password && username == registeredUsers[i].username){
+                curr_player=username;
+                openPage(pageToShow, pageToHide);
+                return;        
+            }
+        }
+        alert(message);
+    }
+    function setSettings(){
+        var count=0;
+        var checkdirc=true;
+        var prevVal=""
+        for (var key in direction) {
+                count++
+                if(prevVal==""){
+                        prevVal=direction[key]
+                }else{
+                        if(prevVal==direction[key])
+                         {      checkdirc=false
+                                prevVal=direction[key]
+                         }else{ prevVal=direction[key]}
+                }
+        }
+        if(!checkdirc){
+                alert("you must choose 4 different direction keys")
+                return;
+        }
+        if(count!=4){
+                alert("you must choose all direction keys")
+                return; 
+        }
+        if($('input[name="balls_number"]').val()<50 ||$('input[name="balls_number"]').val()>90||$('input[name="balls_number"]').val()==""){
+                alert("Minimum number of food-balls is 50 and maximum number is 90. Please insert valid number ")
+                return;
+        }
+        firstColor  = document.getElementById("first_color").value;  
+        secondColor  = document.getElementById("second_color").value;
+        thirdColor  = document.getElementById("third_color").value;
+        if(firstColor===secondColor|| firstColor===thirdColor|| secondColor===thirdColor){
+                alert("you must choose 3 different colors")
+                return;
+        }
+        
+        if($('input[name="game_time"]').val()<60||$('input[name="game_time"]').val()==""){
+                alert("Minimum time to play is 60 second. Please insert valid number ")
+                return;
+        }
+        if($('input[name="monster_number"]').val()<1 ||$('input[name="monster_number"]').val()>3||$('input[name="monster_number"]').val()==""){
+                alert("Minimum number of monsters is 1 and maximum number is 3. Please insert valid number ")
+                return;
+        }
+        numberOfBalls=$('input[name="balls_number"]').val();
+        numOfFirstColor= Math.floor(60/100*numberOfBalls);
+        numOfSecondColor=Math.floor(30/100*numberOfBalls);
+        numOfThirdColor=Math.floor(10/100*numberOfBalls);
+        var totalBalls=numOfFirstColor+numOfSecondColor+numOfThirdColor;
+        if(totalBalls<numberOfBalls){ 
+                numOfFirstColor=numOfFirstColor+(numberOfBalls-totalBalls); //add the reminder balls 
+        }
+        maxTime= $('input[name="game_time"]').val();
+        numOfMonsters=$('input[name="monster_number"]').val();
+        // document.getElementById("demo1").innerHTML = numberOfBalls;
+        // document.getElementById("demo2").innerHTML = numOfFirstColor;
+        // document.getElementById("demo3").innerHTML = numOfSecondColor;
+        // document.getElementById("demo4").innerHTML = numOfThirdColor;
+        // document.getElementById("demo5").innerHTML = maxTime;
+        // document.getElementById("demo6").innerHTML = numOfMonsters;
+        // document.getElementById("demo6").innerHTML = firstColor;
+
+        openPage("game_page","settings_page")
+        //Start();
+
+    }
+
+    function chooseRandomSettings(){
+        direction['left_key']="ArrowLeft";
+        direction['right_key']="ArrowRight";
+        direction['up_key']="ArrowUp";
+        direction['down_key']="ArrowDown";
+        while(firstColor===secondColor|| firstColor===thirdColor|| secondColor===thirdColor){
+                firstColor=getRandomColor();
+                secondColor=getRandomColor();
+                thirdColor=getRandomColor();
+        }
+        numberOfBalls=Math.floor(Math.random() * (90-50)) + 50;
+        numOfFirstColor= Math.floor(60/100*numberOfBalls);
+        numOfSecondColor=Math.floor(30/100*numberOfBalls);
+        numOfThirdColor=Math.floor(10/100*numberOfBalls); 
+        var totalBalls=numOfFirstColor+numOfSecondColor+numOfThirdColor;
+        if(totalBalls<numberOfBalls){ 
+                numOfFirstColor=numOfFirstColor+(numberOfBalls-totalBalls); //add the reminder balls 
+        }
+        maxTime=Math.floor(Math.random() * (700-50)) + 60
+        numOfMonsters=Math.floor(Math.random() * (3-1)) + 1
+        alert("Settings are randomly selected")
+        openPage("game_page","settings_page")
+
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+                for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+                }
+        return color;
+        }
+
+    function setDirections(directionName){
+        var keyc=event.code
+        direction[directionName]=keyc;
+        if(directionName=="left_key")
+                $('input[name="left_key"]').val(keyc);
+        else if(directionName=="right_key")
+                $('input[name="right_key"]').val(keyc);
+        else if(directionName=="up_key")
+                $('input[name="up_key"]').val(keyc);
+        else if (directionName=="down_key")
+                $('input[name="down_key"]').val(keyc);
+
+    }
+
+    //Start();
+
+    function Start() {
+       
+        board = new Array();
+        score = 0;
+        pac_color = "yellow";
+        var cnt = 100;
+        var food_remain = numberOfBalls;
+       // var food_remain =50;
+        var pacman_remain = 1;
+        start_time = new Date();
+        for (var i = 0; i < 10; i++) {
+            board[i] = new Array();
+            //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
+            for (var j = 0; j < 10; j++) {
+                if ((i === 3 && j === 3) || (i === 3 && j === 4) || (i === 3 && j === 5) || (i === 6 && j === 1) || (i === 6 && j === 2)) {
+                    board[i][j] = 4;
+                } else {
+                    var randomNum = Math.random();
+                    if (randomNum <= 1.0 * numOfFirstColor / cnt) {
+                        food_remain--;
+                        numOfFirstColor--;
+                        board[i][j] = 5;
+                    } else if (randomNum < 1.0 * (pacman_remain + numOfFirstColor) / cnt) {
+                        shape.i = i;
+                        shape.j = j;
+                        pacman_remain--;
+                        board[i][j] = 2;
+                    } else {
+                        board[i][j] = 0;
+                    }
+                    cnt--;
+                }
+            }
+        }
+        while (food_remain > 0) {
+            var emptyCell;
+            if(numOfFirstColor>0){
+                emptyCell = findRandomEmptyCell(board);
+                board[emptyCell[0]][emptyCell[1]] = 5;
+                food_remain--;
+                numOfFirstColor--;
+            }
+            if(numOfSecondColor>0){
+                emptyCell = findRandomEmptyCell(board);
+                board[emptyCell[0]][emptyCell[1]] = 6;
+                food_remain--;
+                numOfSecondColor--;
+            }
+            if(numOfThirdColor>0){
+                emptyCell = findRandomEmptyCell(board);
+            board[emptyCell[0]][emptyCell[1]] = 7;
+            food_remain--;
+            numOfThirdColor--;
+            } 
+        }
+        keysDown = {};
+        addEventListener("keydown", function (e) {
+            keysDown[e.code] = true;
+        }, false);
+        addEventListener("keyup", function (e) {
+            keysDown[e.code] = false;
+        }, false);
+        interval = setInterval(UpdatePosition, 250);
+    }
+
+
+    function findRandomEmptyCell(board) {
+        var i = Math.floor((Math.random() * 9) + 1);
+        var j = Math.floor((Math.random() * 9) + 1);
+        while (board[i][j] !== 0) {
+            i = Math.floor((Math.random() * 9) + 1);
+            j = Math.floor((Math.random() * 9) + 1);
+        }
+        return [i, j];
+    }
+
+    /**
+     * @return {number}
+     */
+    function GetKeyPressed() {
+        if (keysDown[direction['up_key']]) {
+            return 1;
+        }
+        if (keysDown[direction['down_key']]) {
+            return 2;
+        }
+        if (keysDown[direction['left_key']]) {
+            return 3;
+        }
+        if (keysDown[direction['right_key']]) {
+            return 4;
+        }
+    }
+
+    function Draw() {
+        context.clearRect(0, 0, canvas.width, canvas.height); //clean board
+        lblName.value=curr_player;
+        lblScore.value = score;
+        lblLife.value= life;
+        lblTime.value = time_elapsed;
+        for (var i = 0; i < 10; i++) {
+            for (var j = 0; j < 10; j++) {
+                var center = new Object();
+                center.x = i * 60 + 30;
+                center.y = j * 60 + 30;
+                if (board[i][j] === 2) {
+                    context.beginPath();
+                    context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+                    context.lineTo(center.x, center.y);
+                    context.fillStyle = pac_color; //color
+                    context.fill();
+                    context.beginPath();
+                    context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+                    context.fillStyle = "black"; //color
+                    context.fill();
+                } else if (board[i][j] === 5) {
+                    context.beginPath();
+                    context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+                    context.fillStyle = firstColor; //color
+                    context.fill();
+                }else if(board[i][j] === 6){
+                    context.beginPath();
+                    context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+                    context.fillStyle = secondColor; //color
+                    context.fill();
+                }else if(board[i][j] === 7){
+                    context.beginPath();
+                    context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+                    context.fillStyle = thirdColor; //color
+                    context.fill();
+                }
+                 else if (board[i][j] === 4) {
+                    context.beginPath();
+                    context.rect(center.x - 30, center.y - 30, 60, 60);
+                    context.fillStyle = "grey"; //color
+                    context.fill();
+                }
+            }
+        }
+
+
+    }
+
+    function UpdatePosition() {
+        board[shape.i][shape.j] = 0;
+        var x = GetKeyPressed();
+        if (x === 1) {
+            if (shape.j > 0 && board[shape.i][shape.j - 1] !== 4) {
+                shape.j--;
+            }
+        }
+        if (x === 2) {
+            if (shape.j < 9 && board[shape.i][shape.j + 1] !== 4) {
+                shape.j++;
+            }
+        }
+        if (x === 3) {
+            if (shape.i > 0 && board[shape.i - 1][shape.j] !== 4) {
+                shape.i--;
+            }
+        }
+        if (x === 4) {
+            if (shape.i < 9 && board[shape.i + 1][shape.j] !== 4) {
+                shape.i++;
+            }
+        }
+        if (board[shape.i][shape.j] === 5) {
+            score+=5;
+        }else if(board[shape.i][shape.j] === 6){
+            score+=15;
+        }else if(board[shape.i][shape.j] === 7){
+            score+=25;
+        }
+        board[shape.i][shape.j] = 2;
+        var currentTime = new Date();
+        time_elapsed = (currentTime - start_time) / 1000;
+        if(time_elapsed>=maxTime){
+            if(score<150){
+                window.clearInterval(interval);
+                window.alert("You can do better. Your score is: "+score);
+            }
+            else {
+                window.clearInterval(interval);
+                window.alert("We have a Winner!!!");
+            }
+              
+        }
+        if (score >= 20 && time_elapsed <= 10) {
+            pac_color = "green";
+        }
+        if (score === 50) {
+            window.clearInterval(interval);
+            window.alert("Game completed");
+        } else {
+            Draw();
+        }
+    }
+</script>
+</body>
+
+</html>
